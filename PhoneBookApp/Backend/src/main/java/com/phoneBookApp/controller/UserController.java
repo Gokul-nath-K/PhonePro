@@ -26,7 +26,7 @@ public class UserController {
 	UserService uService;
 	
 	
-	@Operation(summary = "Retrieve all products records")
+	@Operation(summary = "Retrieve all user records")
 	@ApiResponses(value = { 
 			@ApiResponse(responseCode = "200", description = "All user details are retrieved successfully!"),
 			@ApiResponse(responseCode = "500", description = "Could not retrieve user records") 
