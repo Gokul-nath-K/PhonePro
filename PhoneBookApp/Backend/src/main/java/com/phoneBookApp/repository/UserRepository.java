@@ -9,9 +9,21 @@ import org.springframework.stereotype.Repository;
 
 import com.phoneBookApp.entity.User;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+import jakarta.transaction.Transactional;
 
-	@Query("select u from User u where u.name = ?1")
-	public List<User> findByName(@Param("name") String name);
+@Repository
+public interface UserRepository extends JpaRepository<User, Long>{
+	
+	
+	@Query("select u from User u where u.email = ?1")
+	public List<User> checkPassword(@Param("email") String email);
+	
+	
+	@Transactional
+	@Query("select count(u) from User u where u.email = ?1") 
+	public List<Integer> isEmailExist(@Param("email") String email);
+	
+	@Transactional
+	@Query("select count(u) from User u where u.phone_no = ?1") 
+	public List<Integer> isPhnoExist(@Param("phno") Long phone_no);
 }
