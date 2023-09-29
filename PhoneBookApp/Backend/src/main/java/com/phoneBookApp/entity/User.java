@@ -1,21 +1,14 @@
 package com.phoneBookApp.entity;
 
-import java.util.List;
-
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity; 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
 @Entity
 @Table(name = "user_details")
 public class User {
@@ -24,29 +17,24 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	private Long phone_no;
 	private String email;
-	private String phone;
-	private String dob;
-	private String address;
-	
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Contacts> contacts;
+	private String password;
 	
 	public User() {
 		
 	}
 
-	public User(Long id, String name, String email, String phone, String dob, String address, List<Contacts> contacts) {
-
+	public User(Long id, String name, Long phone_no, String email, String password) {
+	
 		this.id = id;
 		this.name = name;
+		this.phone_no = phone_no;
 		this.email = email;
-		this.phone = phone;
-		this.dob = dob;
-		this.address = address;
-		this.contacts = contacts;
+		this.password = password;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -64,6 +52,14 @@ public class User {
 		this.name = name;
 	}
 
+	public Long getPhone_no() {
+		return phone_no;
+	}
+
+	public void setPhone_no(Long phone_no) {
+		this.phone_no = phone_no;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -72,44 +68,18 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getDob() {
-		return dob;
-	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public List<Contacts> getContacts() {
-		return contacts;
-	}
-
-	public void setContacts(List<Contacts> contacts) {
-		this.contacts = contacts;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", dob=" + dob
-				+ ", address=" + address + ", contacts=" + contacts + "]";
+		return "User [id=" + id + ", name=" + name + ", phone_no=" + phone_no + ", email=" + email + ", password="
+				+ password + "]";
 	}
-	
-	
 	
 }
