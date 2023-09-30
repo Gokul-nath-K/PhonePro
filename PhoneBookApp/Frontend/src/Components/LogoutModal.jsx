@@ -2,14 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const LogoutModal = () => {
-
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <div
         className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -26,8 +25,8 @@ const LogoutModal = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div classname="modal-body">
-                <p className="px-4 py-3"> Are you sure you want to log out?</p>
+            <div className="modal-body">
+              <p className="px-4 py-3"> Are you sure you want to log out?</p>
             </div>
             <div className="modal-footer">
               <button
@@ -37,7 +36,12 @@ const LogoutModal = () => {
               >
                 Close
               </button>
-              <button type="button" onClick={() => navigate("/")} className="btn btn-danger px-4" data-bs-dismiss="modal">
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className="btn btn-danger px-4"
+                data-bs-dismiss="modal"
+              >
                 Yes
               </button>
             </div>
