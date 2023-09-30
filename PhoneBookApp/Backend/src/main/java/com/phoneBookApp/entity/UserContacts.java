@@ -28,7 +28,7 @@ public class UserContacts {
     @JoinColumn(name = "fdk_user_id", referencedColumnName = "id")
     private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Contacts> contacts;
 	
 	public UserContacts() {
