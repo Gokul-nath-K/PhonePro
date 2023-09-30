@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 const ContactForm = () => {
-  const [formStatus, setFormStatus] = React.useState('Send')
+  const [formStatus, setFormStatus] = useState('Send')
+
   const onSubmit = (e) => {
     e.preventDefault()
     setFormStatus('Submitting...')
