@@ -38,9 +38,10 @@ function AddContact() {
         style={{ maxWidth: "80%", paddingRight: "5%" }}
       >
         <h3 className="py-3 text-light">New Contact</h3>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="needs-validation">
           <div className="form-group pb-4">
             <input
+              required
               onChange={handleChange}
               name="name"
               style={{ color: "white" }}
@@ -49,6 +50,9 @@ function AddContact() {
               id="exampleInputEmail1"
               placeholder="Enter Name"
             />
+            <div class="invalid-feedback">
+              Required
+            </div>
           </div>
           <div className="form-group pb-4">
             <input
@@ -59,7 +63,8 @@ function AddContact() {
               className="add-con-input my-3 form-control bg-secondary"
               id="exampleInputPassword1"
               placeholder="Mobile number"
-            />
+              required
+              />
           </div>
           <div className="form-group pb-4">
             <input
@@ -70,7 +75,8 @@ function AddContact() {
               className="add-con-input my-3 form-control bg-secondary"
               id="exampleInputEmail1"
               placeholder="Enter email"
-            />
+              required
+              />
           </div>
           <div className="form-group pb-4">
             <input
