@@ -1,5 +1,6 @@
 package com.phoneBookApp.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,23 @@ public class ContactsService {
 	
 	public List<Contacts> getAllContacts(Long user_id) {
 		
-		UserContacts user = uRepo.findById(user_id).get();
+		UserContacts user = null;
 		
-		return user.getContacts();
+		try {
+			
+			 user = uRepo.findById(user_id).get();
+		}
+		catch(Exception e) {
+			
+		}
+		
+		if(user != null) {
+			
+			return user.getContacts();
+		}
+		else {
+			
+			return new ArrayList<>();
+		}
 	}
 }
