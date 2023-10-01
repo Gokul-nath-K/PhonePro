@@ -1,6 +1,7 @@
 package com.phoneBookApp.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.phoneBookApp.entity.Contacts;
 import com.phoneBookApp.entity.User;
 import com.phoneBookApp.entity.UserContacts;
+import com.phoneBookApp.repository.UserContactsRepository;
 import com.phoneBookApp.services.UserContactsService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,5 +60,15 @@ public class UserContactsController {
 		
 		return ResponseEntity.ok(service.deleteContact(pair.getFirst(), pair.getSecond()));
 		
+	}
+	
+	
+	@Autowired
+	UserContactsRepository umRepo;
+	
+	@GetMapping("/getUserContacts") 
+	public List<UserContacts> getUserContacts() {
+		
+		return umRepo.findAll();
 	}
 }
