@@ -3,10 +3,18 @@ package Gokul.Backend.Service;
 import java.util.List; 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import Gokul.Backend.DTO.AuthenticationRequest;
+import Gokul.Backend.DTO.AuthenticationResponse;
+import Gokul.Backend.DTO.RegisterRequest;
 import Gokul.Backend.Entity.User;
+import Gokul.Backend.Entity.Enumerate.Role;
 import Gokul.Backend.Repository.UserRepository;
+import Gokul.Backend.Util.JwtService;
 
 
 @Service
@@ -15,55 +23,68 @@ public class EntryService {
 	@Autowired
 	UserRepository uRepo;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
-	public Boolean validateUser(String email, String password) {
+	@Autowired
+	private JwtService jwtService;
+	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
+	public AuthenticationResponse validateUser(AuthenticationRequest request) {
 		
-		List<User> userlist = uRepo.checkPassword(email);
-		String ref = "";
+		authenticationManager.authenticate(
+				
+			new UsernamePasswordAuthenticationToken(
+					request.getEmail(), request.getPassword()
+				)
+		);
 		
-		if(userlist.isEmpty()) {
-			
-			return false;
-		}
-		else {
-						
-			ref = userlist.get(0).getPassword();
-		}
+		var user = uRepo.findByEmail(request.getEmail()).orElseThrow();
 		
+		var jwtToken = jwtService.generateToken(user);
 		
-		if(password.equals(ref)) {
-			
-			return true;
-		}
-		else if( !password.equals(ref) ) {
-			
-			 return false;
-		}
-		else {
-			
-			return false;
-		}
+		return AuthenticationResponse.builder()
+				.token(jwtToken)
+				.build();
 		
 	}
 	
 	
-	public Integer CreateNewUser(User new_user) {
+	public AuthenticationResponse CreateNewUser(RegisterRequest request) {
 		
-		List<Integer> emailCountList = uRepo.isEmailExist(new_user.getEmail());
-		List<Integer> phnoCountList = uRepo.isPhnoExist(new_user.getPhoneno());
+		
+		var user = User.builder()
+				.name(request.getName())
+				.phoneno(request.getPhoneno())
+				.dob(request.getDob())
+				.email(request.getEmail())
+				.password(passwordEncoder.encode(request.getPassword()))
+				.role(Role.USER)
+				.build();
+				
+		
+		List<Integer> emailCountList = uRepo.isEmailExist(user.getEmail());
+		List<Integer> phnoCountList = uRepo.isPhnoExist(user.getPhoneno());
 		
 		if(emailCountList.get(0) !=  0) {
 			
-			return 1;
+			return null;
 		}
 		else if(phnoCountList.get(0) != 0) {
 			
-			return 2;
+			return null;
 		}
 		else {
 			
-			uRepo.save(new_user);
-			return 0;
+			uRepo.save(user);
+			
+			var jwtToken = jwtService.generateToken(user);
+			
+			return AuthenticationResponse.builder()
+					.token(jwtToken)
+					.build();
 		}
 	}
 }
