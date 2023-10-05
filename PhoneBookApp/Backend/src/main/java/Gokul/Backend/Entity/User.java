@@ -1,13 +1,31 @@
 package Gokul.Backend.Entity;
 
-import jakarta.persistence.Entity; 
+
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import Gokul.Backend.Entity.Enumerate.Role;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-//@Table(name = "user_details")
-public class User {
+public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,46 +36,32 @@ public class User {
 	private String dob;
 	private String password;
 	
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	
-
-	public long getId() {
-		return id;
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority(role.name()));
 	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getEmail() {
+	@Override
+	public String getUsername() {
 		return email;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
 	}
-	public long getPhoneno() {
-		return phoneno;
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
 	}
-	public void setPhoneno(long phoneno) {
-		this.phoneno = phoneno;
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
 	}
-	public String getDob() {
-		return dob;
-	}
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
-	
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}	
 	
 }
