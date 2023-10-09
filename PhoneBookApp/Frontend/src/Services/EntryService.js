@@ -9,7 +9,6 @@ const createNewUser = async (request) => {
 
 const validateUser = async (request) => {
     const response = await axios.post(`${BASE_URL}/entry/auth_user`, request);
-    console.log(response.data);
     return response.data;
 };
 
