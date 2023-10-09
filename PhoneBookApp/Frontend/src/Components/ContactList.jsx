@@ -1,11 +1,19 @@
 import { PencilSquare, Trash3Fill } from "react-bootstrap-icons";
-import { contacts } from "../Assets/Contexts/Contacts";
-import { useState } from "react";
+// import { contacts } from "../Assets/Contexts/Contacts";
+import { useCallback, useEffect, useState } from "react";
+
+import { ContactService } from "../Services/ContactService";
+import { useDispatch } from "react-redux";
+import { editContact } from "../Assets/Slices/ContactSlice";
+import { useNavigate } from "react-router-dom";
 
 const ContactList = () => {
   const array = Array.from({ length: 26 }, (value, index) => index + 1);
   const [style, setStyle] = useState({ display: "none" });
   const [isHovering, setIsHovering] = useState(-1);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleMouseEnter = (i) => {
     setIsHovering(i);
   };
@@ -14,6 +22,37 @@ const ContactList = () => {
     setIsHovering(-1);
   };
 
+  const [contacts, setContacts] = useState([]);
+
+  const fetchContacts = useCallback(async () => {
+    try {
+      const response = await ContactService.getAllContacts();
+      setContacts(response);
+    } catch (err) {
+      setStyle(style);
+    }
+  }, [style]);
+
+  useEffect(() => {
+    fetchContacts();
+  }, [fetchContacts]);
+
+  const handleEdit = (contact) => {
+    let editedContact = contacts[contacts.indexOf(contact)];
+
+    dispatch(
+      editContact({
+        editedContact: editedContact,
+      })
+    );
+    navigate("editcontact");
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await ContactService.deleteContact(id).then(() => fetchContacts());
+    } catch (err) {}
+  };
   return (
     <>
       <div
@@ -76,10 +115,11 @@ const ContactList = () => {
                                     type="button"
                                     className="btn btn-secondary rounded fs-5"
                                     style={
-                                      isHovering == contact.id
+                                      isHovering === contact.id
                                         ? { display: "block" }
                                         : style
                                     }
+                                    onClick={() => handleEdit(contact)}
                                   >
                                     <PencilSquare />
                                   </button>
@@ -89,10 +129,11 @@ const ContactList = () => {
                                     type="button"
                                     className="btn btn-secondary rounded fs-5"
                                     style={
-                                      isHovering == contact.id
+                                      isHovering === contact.id
                                         ? { display: "block" }
                                         : style
                                     }
+                                    onClick={() => handleDelete(contact.id)}
                                   >
                                     <Trash3Fill />
                                   </button>
