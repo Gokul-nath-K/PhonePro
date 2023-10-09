@@ -4,16 +4,13 @@ import {
   HouseFill,
   PersonFill,
   PersonFillAdd,
-  PersonFillGear,
   Search,
   TelephoneFill,
 } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { getUserSlice } from "../Assets/Slices/UserSlice";
 
 function SideBar() {
-  const user = useSelector(getUserSlice);
+  const username = localStorage.getItem("name") || "";
 
   return (
     <>
@@ -47,14 +44,14 @@ function SideBar() {
               </span>
             </Link>
           </li>
-          <li className="nav-item mb-3">
+          {/* <li className="nav-item mb-3">
             <Link to="editcontact" className="nav-link px-0 align-middle">
               <PersonFillGear color="azure" size={20} />{" "}
               <span className="ms-1 d-none d-sm-inline text-secondary">
                 Edit contact
               </span>
             </Link>
-          </li>
+          </li> */}
           <li className="nav-item mb-3">
             <Link to="search" className="nav-link px-0 align-middle">
               <Search color="azure" size={20} />{" "}
@@ -78,8 +75,8 @@ function SideBar() {
           >
             <PersonFill color="azure" size={20} />{" "}
             <span className="ms-1 d-none d-sm-inline text-secondary">
-              {Object.keys(user).length !== 0
-                ? user.email.slice(0, 8) + "..."
+              {username !== ""
+                ? username.slice(0, 8) + "..."
                 : "Profile"}
             </span>
           </Link>
