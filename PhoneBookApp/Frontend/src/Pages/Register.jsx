@@ -13,8 +13,10 @@ import {
   setActive,
   signup,
 } from "../Assets/Slices/UserSlice";
+import "react-toastify/dist/ReactToastify.css";
 import { EntryService } from "../Services/EntryService";
 import { ToastContainer, toast } from "react-toastify";
+import { UserService } from "../Services/UserService";
 
 const RegisterContainer = styled.div`
   width: 100%;
@@ -112,10 +114,7 @@ const Register = (props) => {
   const active = useSelector(activeStatus);
   const navigate = useNavigate();
   const [user, setUser] = useState({});
-  const [error, setError] = useState({
-    email: "Please enter email id",
-    password: "Please enter password",
-  });
+
   const dispatch = useDispatch();
   const [classes, setClasses] = useState({});
 
@@ -157,32 +156,35 @@ const Register = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let token;
+  
     setClasses(validateForm(user));
-    
+
     switch (active) {
       case "signin":
         if (classes.email === "is-valid" && classes.password === "is-valid") {
+          let user_res;
           let response;
           try {
             response = await EntryService.validateUser({
-              "email": user.email,
-              "password": user.password
+              email: user.email,
+              password: user.password,
             });
-            dispatch( login({ user: user }) );
-            console.log(response.token);
-          }
-          catch(err) {
-          }
+          } catch (err) {}
+
           if (response.token !== null) {
-            localStorage.setItem("username", user.name);
-            localStorage.setItem("role", "USER");
             localStorage.setItem("Token", response.token);
-            navigate("/home");
+            user_res = await UserService.getByEmail(user.email);
+            localStorage.setItem("name", user_res.name);
+            localStorage.setItem("id", user_res.id);
+            localStorage.setItem("role", user_res.role);
+            dispatch(login({ user: user_res }));
+            toast.success("Login successful");
+            setTimeout(() => {
+              navigate("/home");
+            }, 3000);
           } else {
-            dispatch(setActive({ active: "signup" }))
-            console.log("Ivalid email or password");
-            toast.error('Ivalid email or password');
+            dispatch(setActive({ active: "signin" }));
+            toast.error("Ivalid email or password");
           }
         }
         break;
@@ -191,31 +193,27 @@ const Register = (props) => {
           classes.email === "is-valid" &&
           classes.password === "is-valid" &&
           classes.name === "is-valid"
-          ) {
-            let response;
-            try {
-              response = await EntryService.createNewUser({
-              "name": user.name,
-              "phoneno": Number(user.phoneno),
-              "dob": user.dob,
-              "email": user.email,
-              "password": user.password,
-              "role": "USER"
+        ) {
+          let response;
+          try {
+            response = await EntryService.createNewUser({
+              name: user.name,
+              phoneno: Number(user.phoneno),
+              dob: user.dob,
+              email: user.email,
+              password: user.password,
+              role: "USER",
             });
-            dispatch( signup({ user: user }) );
-            console.log(response.token);
-          }
-          catch(err) {
-          }
+            dispatch(signup({ user: user }));
+          } catch (err) {}
           if (response.token !== undefined) {
             localStorage.setItem("username", user.name);
             localStorage.setItem("role", "USER");
             localStorage.setItem("Token", response.token);
             navigate("/home");
           } else {
-            dispatch(setActive({ active: "signup" }))
-            console.log("User already exists");
-            toast.error('User already exists');
+            dispatch(setActive({ active: "signup" }));
+            toast.error("User already exists");
           }
         }
         break;
@@ -257,7 +255,6 @@ const Register = (props) => {
     switchToSignin,
     handleChange,
     handleSubmit,
-    error,
     classes,
   };
 
@@ -295,7 +292,7 @@ const Register = (props) => {
               </InnerContainer>
             </BoxContainer>
           </RegisterContainer>
-        <ToastContainer/>
+          <ToastContainer />
         </div>
       </AccountContext.Provider>
     </>
