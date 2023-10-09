@@ -55,22 +55,15 @@ public class ContactsService {
 	public Contacts updateContact(Contacts newContact, Long id) {
 		
 		Contacts updatedContact = cRepo.findById(id).get();
-		
-		if(updatedContact == null) {
-			
-			return updatedContact;
-		}
-		else {
-			
-			updatedContact.setEmail(newContact.getEmail());
-			updatedContact.setGroupname(newContact.getGroupname());
-			updatedContact.setName(newContact.getName());
-			updatedContact.setPhoneno(newContact.getPhoneno());
-			updatedContact.setUser(newContact.getUser());
-			
-			return cRepo.save(updatedContact);
-		}
-	}
+
+        updatedContact.setEmail(newContact.getEmail());
+        updatedContact.setGroupname(newContact.getGroupname());
+        updatedContact.setName(newContact.getName());
+        updatedContact.setPhoneno(newContact.getPhoneno());
+        updatedContact.setUser(newContact.getUser());
+
+        return cRepo.save(updatedContact);
+    }
 	
 	public void deleteContact(Long id) {
 		
