@@ -1,35 +1,33 @@
-import axios from "axios";
 import React, { useState } from "react";
+import { ContactService } from '../Services/ContactService'
+import { UserService } from '../Services/UserService'
+import { useNavigate } from "react-router-dom";
 
 function AddContact() {
   const [contact, setContact] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setContact({ ...contact, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    let id = localStorage.getItem("id");
 
+    let userById = await UserService.getById(id)
     const userContact = {
-      email: "gokul@gmail.com",
-      phone_no: 6381885164,
-      user: {
-        id: 1,
-        name: "Gokul nath",
-        phone_no: 6381885164,
-        email: "gokul@gmail.com",
-        password: "012345678",
-      },
-      contacts: [contact],
+      ...contact,
+      user: userById,
     };
 
     try {
-      axios.post("http://localhost:8083/user_contact/post", userContact);
+      await ContactService.postContact(userContact)
     } catch (err) {
-      console.log("Error : ${err.message}");
+      console.log(`Error : ${err.message}`);
     }
-    console.log(userContact);
+
+    navigate(-1)
   };
   return (
     <>
@@ -57,7 +55,7 @@ function AddContact() {
           <div className="form-group pb-4">
             <input
               onChange={handleChange}
-              name="phone_no"
+              name="phoneno"
               style={{ color: "white" }}
               type="number"
               className="add-con-input my-3 form-control bg-secondary"
@@ -80,7 +78,8 @@ function AddContact() {
           </div>
           <div className="form-group pb-4">
             <input
-              name="group"
+              onChange={handleChange}
+              name="groupname"
               style={{ color: "white" }}
               type=""
               text
