@@ -3,21 +3,28 @@ import { BASE_URL, HEADERS } from "../Constants/ApiConstant";
 
 const getAll = async () => {
   const response = await axios.get(`${BASE_URL}/api/user/getAll`, {
-    HEADERS
+    headers : HEADERS
   });
   return response.data;
 };
 
 const getAllUser = async () => {
-  const response = await axios.get(`${BASE_URL}/api/user/getAllUser`, {
-    HEADERS,
+  const response = await axios.get(`${BASE_URL}/user/getAllUser`, {
+    headers : HEADERS,
+  });
+  return response.data;
+};
+
+const getByEmail = async (email) => {
+  const response = await axios.get(`${BASE_URL}/user/getByEmail/` + email, {
+    headers : HEADERS,
   });
   return response.data;
 };
 
 const getById = async (id) => {
-  const response = await axios.get(`${BASE_URL}/api/user/getById/` + id, {
-    HEADERS,
+  const response = await axios.get(`${BASE_URL}/user/getById/` + id, {
+    headers : HEADERS,
   });
   return response.data;
 };
@@ -25,5 +32,6 @@ const getById = async (id) => {
 export const UserService = {
   getAll,
   getAllUser,
+  getByEmail,
   getById,
 };
