@@ -16,4 +16,9 @@ public interface ContactsRepository extends JpaRepository<Contacts, Long> {
 	@Transactional
 	@Query(value="select c from Contacts c where c.user_id = :user_id", nativeQuery = true)
 	public List<Contacts> getContactsByUserId(@Param("user_id") long user_id);
+	
+	
+//	@Transactional
+//	@Query(value="select c from Contacts c where c.id = :c_id", nativeQuery = true)
+//	public Contacts findByCiD(@Param("c_id") Long c_id);
 }
