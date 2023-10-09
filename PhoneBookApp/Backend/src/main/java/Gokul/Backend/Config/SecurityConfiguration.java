@@ -45,14 +45,13 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-		
+
 		return httpSecurity.build();
-	
 	}
 	
 	@Bean
     public CorsConfigurationSource corsConfigurationSource() {
-            
+
 		CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedHeaders(Api.HEADERS);
         configuration.setAllowCredentials(true);
