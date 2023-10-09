@@ -6,7 +6,15 @@ import SignupForm from "./SignupForm";
 import { AccountContext } from "../Assets/Contexts/AccountContext";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import store from "../Assets/Redux/Store";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  activeStatus,
+  login,
+  setActive,
+  signup,
+} from "../Assets/Slices/UserSlice";
+import { EntryService } from "../Services/EntryService";
+import { ToastContainer, toast } from "react-toastify";
 
 const RegisterContainer = styled.div`
   width: 100%;
@@ -18,7 +26,7 @@ const RegisterContainer = styled.div`
 `;
 
 const BoxContainer = styled.div`
-  width: 290px;
+  width: 390px;
   min-height: 550px;
   display: flex;
   flex-direction: column;
@@ -81,15 +89,15 @@ const BackDrop = styled(motion.div)`
 const backdropVariants = {
   expanded: {
     width: "233%",
-    height: "1050px",
+    height: "1200px",
     borderRadius: "20%",
     transform: "rotate(60deg)",
   },
   collapsed: {
-    width: "160%",
+    width: "120%",
     height: "550px",
     borderRadius: "50%",
-    transform: "rotate(60deg)",
+    transform: "rotate(75deg)",
   },
 };
 
@@ -101,57 +109,120 @@ const expandingTransition = {
 
 const Register = (props) => {
   const [isExpanded, setExpanded] = useState(false);
-  const [active, setActive] = useState("signin");
+  const active = useSelector(activeStatus);
   const navigate = useNavigate();
   const [user, setUser] = useState({});
-  const [error, setError] = useState({});
+  const [error, setError] = useState({
+    email: "Please enter email id",
+    password: "Please enter password",
+  });
+  const dispatch = useDispatch();
+  const [classes, setClasses] = useState({});
 
   const handleChange = (e) => {
-    setUser({...user, [e.target.name] : e.target.value});
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const validateForm = (value) => {
-    const errors = {};
+    const classname = {};
     const emailPattern = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
-    const passwordPattern = /^(?=.*[0-9])(?=.*[a-z]).{8,32}$/
+    const passwordPattern = /^(?=.*[0-9])(?=.*[a-z]).{8,32}$/;
 
     if (!value.email) {
-        errors.email = "Please enter email id"
-    }
-    else if (!emailPattern.test(value.email)) {
-        errors.email = 'Enter valid email'
+      classname.email = "is-invalid";
+    } else if (!emailPattern.test(value.email)) {
+      classname.email = "is-invalid";
+    } else {
+      classname.email = "is-valid";
     }
 
     if (!value.password) {
-        errors.password = "Please enter password"
+      classname.password = "is-invalid";
+    } else if (!passwordPattern.test(value.password)) {
+      classname.password = "is-invalid";
+    } else {
+      classname.password = "is-valid";
     }
-    else if (!passwordPattern.test(value.password)) {
-        errors.password = 'Enter valid password'
+
+    if (!value.name) {
+      classname.name = "is-invalid";
+    } else {
+      classname.name = "is-valid";
     }
 
-    return errors;
-  }
-
-  useEffect(() => {
-
-    setError(validateForm(user));
-
-  }, [user])
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    store.dispatch({
-      type : "login",
-      payload : user
-    })
-    if(Object.keys(error).length === 0) {
-      navigate("/home");
-    }
-    else {
-      alert('Invalid email and password')
-    }
+    return classname;
   };
 
+  useEffect(() => {}, [user]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let token;
+    setClasses(validateForm(user));
+    
+    switch (active) {
+      case "signin":
+        if (classes.email === "is-valid" && classes.password === "is-valid") {
+          let response;
+          try {
+            response = await EntryService.validateUser({
+              "email": user.email,
+              "password": user.password
+            });
+            dispatch( login({ user: user }) );
+            console.log(response.token);
+          }
+          catch(err) {
+          }
+          if (response.token !== null) {
+            localStorage.setItem("username", user.name);
+            localStorage.setItem("role", "USER");
+            localStorage.setItem("Token", response.token);
+            navigate("/home");
+          } else {
+            dispatch(setActive({ active: "signup" }))
+            console.log("Ivalid email or password");
+            toast.error('Ivalid email or password');
+          }
+        }
+        break;
+      case "signup":
+        if (
+          classes.email === "is-valid" &&
+          classes.password === "is-valid" &&
+          classes.name === "is-valid"
+          ) {
+            let response;
+            try {
+              response = await EntryService.createNewUser({
+              "name": user.name,
+              "phoneno": Number(user.phoneno),
+              "dob": user.dob,
+              "email": user.email,
+              "password": user.password,
+              "role": "USER"
+            });
+            dispatch( signup({ user: user }) );
+            console.log(response.token);
+          }
+          catch(err) {
+          }
+          if (response.token !== undefined) {
+            localStorage.setItem("username", user.name);
+            localStorage.setItem("role", "USER");
+            localStorage.setItem("Token", response.token);
+            navigate("/home");
+          } else {
+            dispatch(setActive({ active: "signup" }))
+            console.log("User already exists");
+            toast.error('User already exists');
+          }
+        }
+        break;
+      default:
+        break;
+    }
+  };
   const playExpandingAnimation = () => {
     setExpanded(true);
     setTimeout(() => {
@@ -162,14 +233,22 @@ const Register = (props) => {
   const switchToSignup = () => {
     playExpandingAnimation();
     setTimeout(() => {
-      setActive("signup");
+      dispatch(
+        setActive({
+          active: "signup",
+        })
+      );
     }, 400);
   };
 
   const switchToSignin = () => {
     playExpandingAnimation();
     setTimeout(() => {
-      setActive("signin");
+      dispatch(
+        setActive({
+          active: "signin",
+        })
+      );
     }, 400);
   };
 
@@ -178,7 +257,8 @@ const Register = (props) => {
     switchToSignin,
     handleChange,
     handleSubmit,
-    error
+    error,
+    classes,
   };
 
   return (
@@ -215,6 +295,7 @@ const Register = (props) => {
               </InnerContainer>
             </BoxContainer>
           </RegisterContainer>
+        <ToastContainer/>
         </div>
       </AccountContext.Provider>
     </>
