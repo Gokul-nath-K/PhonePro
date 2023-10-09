@@ -1,8 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from '../Assets/Slices/UserSlice' 
 
 const LogoutModal = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <>
       <div
@@ -38,7 +42,10 @@ const LogoutModal = () => {
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/")}
+                onClick={() => {
+                  dispatch(logout());
+                  navigate("/");
+                }}
                 className="btn btn-danger px-4"
                 data-bs-dismiss="modal"
               >
