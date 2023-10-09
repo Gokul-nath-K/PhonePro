@@ -16,7 +16,7 @@ function HomeLayout() {
           <SideBar />
           
           </div>
-          <div className="col col-md-6 col-sm-11 col-xl-7 py-3 pt-4 bg-dark bg-gradient overflow-y-auto" style={{height : "100%"}}>
+          <div className="col col-md-6 col-sm-11 col-xl-7 py-3 px-4 pt-4 bg-dark bg-gradient overflow-y-auto" style={{height : "100%"}}>
             {/* <div className="container position-relative bg-dark" style={{ height:"100%"}}> */}
           <Outlet />
             {/* </div> */}
