@@ -5,6 +5,7 @@ import Dialpad from "../Components/Dialpad";
 import LogoutModal from "../Components/LogoutModal";
 
 function HomeLayout() {
+
   return (
     <>
       <div className="container-fluid bg-dark bg-gradient">
