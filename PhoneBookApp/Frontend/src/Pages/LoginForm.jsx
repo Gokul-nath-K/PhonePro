@@ -11,31 +11,33 @@ import {
 import { AccountContext } from "../Assets/Contexts/AccountContext";
 
 const LoginForm = (props) => {
-  const { switchToSignup, handleChange, handleSubmit, error } = useContext(AccountContext);
+  const { switchToSignup, handleChange, handleSubmit, error, classes } = useContext(AccountContext);
 
   return (
     <>
       <BoxContainer>
-        <FormContainer>
+        <FormContainer onSubmit={handleSubmit} className="needs-validation">
           <Input
             name="email"
             type="email"
             onChange={handleChange}
-            cplaceholder="Email"
-          />
-          <span style={{ color: 'red', fontSize: 'small', textAlign: 'start', display: 'flex', padding: 4, paddingLeft: 10 }} > {error.email} </span>
+            placeholder="Email"
+            className= { "form-control " + classes.email}
+            />
           <Input
             name="password"
             type="password"
             onChange={handleChange}
             placeholder="Password"
+            className= { "form-control " + classes.password}
           />
-          <span style={{ color: 'red', fontSize: 'small', textAlign: 'start', display: 'flex', padding: 4, paddingLeft: 10 }} > {error.password } </span>
+          <div style={{ display: "flex", justifyContent: "center", width: "100%", flexDirection: "column", alignItems: "center"}}>  
+          <MutedLine>Forget password</MutedLine>
+          <SubmitButton type="submit">
+            Signin
+          </SubmitButton>
+          </div>
         </FormContainer>
-        <MutedLine>Forget password</MutedLine>
-        <SubmitButton onClick={handleSubmit} type="submit">
-          Signin
-        </SubmitButton>
         <LineText>
           Don't have an account?{" "}
           <BoldLink onClick={switchToSignup}>Signup</BoldLink>
