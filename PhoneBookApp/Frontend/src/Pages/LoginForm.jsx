@@ -11,7 +11,7 @@ import {
 import { AccountContext } from "../Assets/Contexts/AccountContext";
 
 const LoginForm = (props) => {
-  const { switchToSignup, handleChange, handleSubmit, error, classes } = useContext(AccountContext);
+  const { switchToSignup, handleChange, handleSubmit, classes } = useContext(AccountContext);
 
   return (
     <>
