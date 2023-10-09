@@ -1,6 +1,6 @@
 package Gokul.Backend.Service;
 
-import java.util.List; 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,14 +33,23 @@ public class EntryService {
 	private AuthenticationManager authenticationManager;
 	
 	public AuthenticationResponse validateUser(AuthenticationRequest request) {
-		
+
+		try {
+
+
 		authenticationManager.authenticate(
 				
 			new UsernamePasswordAuthenticationToken(
 					request.getEmail(), request.getPassword()
 				)
 		);
-		
+		}
+		catch(Exception e) {
+
+			return AuthenticationResponse.builder()
+					.token(null)
+					.build();
+		}
 		var user = uRepo.findByEmail(request.getEmail()).orElseThrow();
 		
 		var jwtToken = jwtService.generateToken(user);
@@ -61,7 +70,7 @@ public class EntryService {
 				.dob(request.getDob())
 				.email(request.getEmail())
 				.password(passwordEncoder.encode(request.getPassword()))
-				.role(Role.USER)
+				.role(Role.valueOf(request.getRole().toUpperCase()))
 				.build();
 				
 		
@@ -69,11 +78,9 @@ public class EntryService {
 		List<Integer> phnoCountList = uRepo.isPhnoExist(user.getPhoneno());
 		
 		if(emailCountList.get(0) !=  0) {
-			
 			return null;
 		}
 		else if(phnoCountList.get(0) != 0) {
-			
 			return null;
 		}
 		else {
