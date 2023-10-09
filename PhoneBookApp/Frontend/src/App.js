@@ -11,6 +11,7 @@ import FAQ from './Pages/FAQ';
 import TermCondition from './Pages/TermCondition';
 import ContactForm from './Pages/ContactForm';
 import ContactList from './Components/ContactList';
+import ImportContacts from './Components/ImportContacts';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/t&c' element={<TermCondition />} />
         <Route path='/contact' element={<ContactForm />} />
       </Routes>
+      {/* <ImportContacts/> */}
     </>
   );
 }
