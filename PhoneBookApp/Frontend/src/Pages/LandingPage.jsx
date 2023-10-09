@@ -7,11 +7,13 @@ import LandingContent from "../Components/LandingContent";
 const LandingPage = () => {
   return (
     <>
+    <div className="">
       <NavBar />
+      </div>
       <div className="landing-container bg-dark">
         <LandingContent/>
         <Footer />
-      </div>
+    </div>
     </>
   );
 };
