@@ -36,28 +36,27 @@ public class EntryService {
 
 		try {
 
+			authenticationManager.authenticate(
 
-		authenticationManager.authenticate(
-				
-			new UsernamePasswordAuthenticationToken(
-					request.getEmail(), request.getPassword()
-				)
-		);
+				new UsernamePasswordAuthenticationToken(
+						request.getEmail(), request.getPassword()
+					)
+			);
+
+			var user = uRepo.findByEmail(request.getEmail()).orElseThrow();
+
+			var jwtToken = jwtService.generateToken(user);
+
+			return AuthenticationResponse.builder()
+					.token(jwtToken)
+					.build();
 		}
 		catch(Exception e) {
 
 			return AuthenticationResponse.builder()
-					.token(null)
+					.token("")
 					.build();
 		}
-		var user = uRepo.findByEmail(request.getEmail()).orElseThrow();
-		
-		var jwtToken = jwtService.generateToken(user);
-		
-		return AuthenticationResponse.builder()
-				.token(jwtToken)
-				.build();
-		
 	}
 	
 	
