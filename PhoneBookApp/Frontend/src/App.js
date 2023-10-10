@@ -26,6 +26,7 @@ function App() {
           <Route path='addcontact' element={<AddContact/>} />
           <Route path='editcontact' element={<EditContact/>} />
           <Route path='groupcontact' element={<GroupContact/>} />
+          <Route path='import-contacts' element={<ImportContacts/>} />
         </Route>
         <Route path='/faq' element={<FAQ />} />
         <Route path='/t&c' element={<TermCondition />} />

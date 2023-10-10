@@ -170,7 +170,7 @@ const Register = (props) => {
               password: user.password,
             });
           } catch (err) {}
-
+          console.log(response);
           if (response.token !== null) {
             localStorage.setItem("Token", response.token);
             user_res = await UserService.getByEmail(user.email);

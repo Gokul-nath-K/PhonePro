@@ -58,7 +58,7 @@ body::-webkit-scrollbar {
   }
 .bg-image {
     position: relative;
-    height: 93vh;
+    height: 92vh;
     width: 100%;
     top: 0;
     background-image: url('../Images/LangingPage_background.jpg');

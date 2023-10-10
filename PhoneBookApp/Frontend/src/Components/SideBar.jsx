@@ -60,11 +60,11 @@ function SideBar() {
               </span>
             </Link>
           </li>
-          {/* <li className="nav-item mb-3">
-                    <Link to="groupcontact" className="nav-link px-0 align-middle">
-                    <CollectionFill color="azure" size={20}/> <span className="ms-1 d-none d-sm-inline text-secondary">Groups</span> 
+          <li className="nav-item mb-3">
+                    <Link to="import-contacts" className="nav-link px-0 align-middle">
+                    <PersonFillAdd color="azure" size={20}/> <span className="ms-1 d-none d-sm-inline text-secondary">Import contact</span> 
                     </Link>
-                </li> */}
+                </li>
         </ul>
         <hr />
         <div className="pb-4">

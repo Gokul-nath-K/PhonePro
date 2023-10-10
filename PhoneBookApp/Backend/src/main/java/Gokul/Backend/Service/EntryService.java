@@ -54,7 +54,7 @@ public class EntryService {
 		catch(Exception e) {
 
 			return AuthenticationResponse.builder()
-					.token("")
+					.token(null)
 					.build();
 		}
 	}
