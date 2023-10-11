@@ -6,8 +6,8 @@ import {
   Input,
   LineText,
   SubmitButton,
-} from "../Components/Elements";
-import { AccountContext } from "../Assets/Contexts/AccountContext";
+} from "../../Components/Elements";
+import { AccountContext } from "../../Assets/Contexts/AccountContext";
 
 const SignupForm = (props) => {
   const { switchToSignin, handleChange, handleSubmit, classes } =

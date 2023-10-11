@@ -7,14 +7,14 @@ const Footer = () => {
     <>
       <footer
         className="text-center text-white position-absolute w-100"
-        style={{ backgroundColor: "#272829" }}
+        style={{ backgroundColor: "rgb(8, 2, 2)" }}
       >
         <div className="container">
           <section className="mt-4">
             <div className="row text-center d-flex justify-content-center pt-5">
               <div className="col-md-2">
                 <h6 className="text-uppercase font-weight-bold">
-                  <a href="#navbar-id" className="text-white">
+                  <a href="#navbar-id" className="text-white text-decoration-none">
                     Home
                   </a>
                 </h6>
@@ -22,7 +22,7 @@ const Footer = () => {
 
               <div className="col-md-2">
                 <h6 className="text-uppercase font-weight-bold">
-                  <Link to="/faq" className="text-white">
+                  <Link to="/faq" className="text-white text-decoration-none">
                     FAQ
                   </Link>
                 </h6>
@@ -30,7 +30,7 @@ const Footer = () => {
 
               <div className="col-md-2">
                 <h6 className="text-uppercase font-weight-bold">
-                  <Link to="/t&c" className="text-white">
+                  <Link to="/t&c" className="text-white text-decoration-none">
                     Terms
                   </Link>
                 </h6>
@@ -38,7 +38,7 @@ const Footer = () => {
 
               <div className="col-md-2">
                 <h6 className="text-uppercase font-weight-bold">
-                  <Link to="/contact" className="text-white">
+                  <Link to="/contact" className="text-white text-decoration-none">
                     Contact
                   </Link>
                 </h6>

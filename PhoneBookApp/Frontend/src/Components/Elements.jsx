@@ -49,8 +49,8 @@ export const SubmitButton = styled.button`
   transition: all 240ms ease-in-out;
   background: linear-gradient(
     58deg,
-    rgb(97, 103, 122) 20%,
-    rgb(216, 217, 218) 100%
+    rgb(8, 2, 2, 0.8) 20%,
+    rgb(8, 2, 2, 0.8) 100%
   );
 
   &:hover {
@@ -67,25 +67,25 @@ export const InnerContainer = styled.div`
 
 export const BoldLink = styled.a`
   font-size: 12px;
-  color: rgb(97, 103, 122);
+  color: rgb(8, 2, 2);
   font-weight: 500;
   text-decoration: none;
-  border-bottom: 1px dashed rgb(128, 191, 255);
+  border-bottom: 1px dashed rgb(8, 2, 2);
   cursor: pointer;
 `;
 
 export const LineText = styled.p`
   font-size: 12px;
-  color: rgba(150, 150, 150, 0.8);
+  color: rgb(8, 2, 2, 0.8);
   font-weight: 500;
 `;
 
 export const MutedLine = styled.p`
   font-size: 12px;
-  color: rgba(150, 150, 150, 0.8);
+  color: rgb(8, 2, 2, 0.8);
   font-weight: 500;
   text-decoration: none;
   padding-bottom: 8px;
   padding-top: 8px;
-  border-bottom: 1px dashed rgba(200, 200, 200, 0.8);
+  border-bottom: 1px dashed rgb(8, 2, 2, 0.7);
 `;

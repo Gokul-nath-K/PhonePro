@@ -31,7 +31,10 @@ function SideBar() {
           <li className="nav-item mb-3">
             <Link to="/home" className="nav-link align-middle px-0">
               <HouseFill color="azure" size={20} />{" "}
-              <span className="ms-1 d-none d-sm-inline text-secondary">
+              <span
+                className="ms-1 d-none d-sm-inline "
+                style={{ color: "rgb(241, 212, 229)" }}
+              >
                 Home
               </span>
             </Link>
@@ -39,7 +42,10 @@ function SideBar() {
           <li className="nav-item mb-3">
             <Link to="addcontact" className="nav-link px-0 align-middle">
               <PersonFillAdd color="azure" size={20} />{" "}
-              <span className="ms-1 d-none d-sm-inline text-secondary">
+              <span
+                className="ms-1 d-none d-sm-inline "
+                style={{ color: "rgb(241, 212, 229)" }}
+              >
                 New contact
               </span>
             </Link>
@@ -55,16 +61,25 @@ function SideBar() {
           <li className="nav-item mb-3">
             <Link to="search" className="nav-link px-0 align-middle">
               <Search color="azure" size={20} />{" "}
-              <span className="ms-1 d-none d-sm-inline text-secondary">
+              <span
+                className="ms-1 d-none d-sm-inline "
+                style={{ color: "rgb(241, 212, 229)" }}
+              >
                 Search
               </span>
             </Link>
           </li>
           <li className="nav-item mb-3">
-                    <Link to="import-contacts" className="nav-link px-0 align-middle">
-                    <PersonFillAdd color="azure" size={20}/> <span className="ms-1 d-none d-sm-inline text-secondary">Import contact</span> 
-                    </Link>
-                </li>
+            <Link to="import-contacts" className="nav-link px-0 align-middle">
+              <PersonFillAdd color="azure" size={20} />{" "}
+              <span
+                className="ms-1 d-none d-sm-inline"
+                style={{ color: "rgb(241, 212, 229)" }}
+              >
+                Import contact
+              </span>
+            </Link>
+          </li>
         </ul>
         <hr />
         <div className="pb-4">
@@ -74,10 +89,11 @@ function SideBar() {
             style={{ textDecoration: "none" }}
           >
             <PersonFill color="azure" size={20} />{" "}
-            <span className="ms-1 d-none d-sm-inline text-secondary">
-              {username !== ""
-                ? username.slice(0, 8) + "..."
-                : "Profile"}
+            <span
+              className="ms-1 d-none d-sm-inline "
+              style={{ color: "rgb(241, 212, 229)" }}
+            >
+              {username !== "" ? username.slice(0, 9) + "..." : "Profile"}
             </span>
           </Link>
         </div>
@@ -89,7 +105,10 @@ function SideBar() {
             style={{ textDecoration: "none" }}
           >
             <BoxArrowLeft color="azure" size={20} />{" "}
-            <span className="ms-1 d-none d-sm-inline text-secondary">
+            <span
+              className="ms-1 d-none d-sm-inline"
+              style={{ color: "rgb(241, 212, 229)" }}
+            >
               Logout
             </span>
           </button>

@@ -10,6 +10,7 @@ body {
 * {
     box-sizing: border-box;
 }
+
 html {
     scroll-behavior: smooth;
 }
@@ -51,17 +52,19 @@ code {
 
 body::-webkit-scrollbar {
     display: none;
-  }
+}
 
 ::-webkit-scrollbar {
     display: none;
-  }
+}
+
 .bg-image {
     position: relative;
-    height: 92vh;
+    height: 91vh;
     width: 100%;
     top: 0;
-    background-image: url('../Images/LangingPage_background.jpg');
+    /* background-image: url('../Images/LangingPage_background.jpg'); */
+    background-color: rgb(252, 233, 241);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -81,10 +84,11 @@ body::-webkit-scrollbar {
 
 .inner-content {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.6);
+    /* background-color: rgba(0, 0, 0, 0.6); */
     height: 100vh;
     width: 100%;
     top: 0%;
+    color: #080202;
 }
 
 .sign-group {
@@ -99,6 +103,7 @@ body::-webkit-scrollbar {
     font-size: 20px;
 
 }
+
 .sign-item p {
     display: block;
     padding: 6px;
@@ -110,7 +115,10 @@ body::-webkit-scrollbar {
 }
 
 .add-con-input::placeholder {
-    color: white;
+    color: rgb(8, 2, 2);
+}
+.search-input::placeholder {
+    color: rgb(8, 2, 2);
 }
 
 .inner-content {
@@ -122,4 +130,22 @@ body::-webkit-scrollbar {
 
 .contact-list {
     scroll-behavior: smooth;
+}
+
+#app-unauth {
+    height: 100vh;
+    width: 100%;
+}
+.app-unauth {
+    font-size: 200px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.txt {
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
 }
