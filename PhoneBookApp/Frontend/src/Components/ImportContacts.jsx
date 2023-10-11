@@ -36,13 +36,7 @@ const ImportContacts = () => {
     reader.readAsText(file);
   };
 
-  const handleDragOver = (event) => {
-    event.preventDefault()
-  }
 
-  const handleDragStart = (event) => {
-    event.dataTransfer.setData("text/plain", event.target.id)
-}
 
   return (
     <>
@@ -52,8 +46,8 @@ const ImportContacts = () => {
             className="container-fluid pt-4"
             style={{ maxWidth: "90%", paddingRight: "5%" }}
           >
-            <h3 className="py-3 text-light">Import contacts</h3>
-            <div className="json-container" style={{ color: "white" }}>
+            <h3 className="py-3" style={{ color: "rgb(8, 2, 2)" }}>Import contacts</h3>
+            <div className="json-container" style={{ color: "black" }}>
               <pre>{JSON.stringify(jsonData, null, 2)}</pre>
             </div>
           </div>
@@ -71,7 +65,7 @@ const ImportContacts = () => {
                 onChange={handleCSVInputChange}
               />
               <p>Please select a CSV file.</p>
-              <div className="json-container" style={{ color: "white" }}>
+              <div className="json-container" style={{ color: "black" }}>
                 <pre></pre>
               </div>
             </form>

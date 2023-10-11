@@ -1,5 +1,5 @@
 import React from "react";
-import store from "../Assets/Redux/Store";
+import store from "../../Assets/Redux/Store";
 
 function GroupContact() {
   return (

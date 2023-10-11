@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SearchBar from "../Components/SearchBar";
-import { contacts } from "../Assets/Contexts/Contacts";
+import SearchBar from "../../Components/SearchBar";
+import { contacts } from "../../Assets/Contexts/Contacts";
 
 function SearchPage() {
   const [searchInput, setSearchInput] = useState("");

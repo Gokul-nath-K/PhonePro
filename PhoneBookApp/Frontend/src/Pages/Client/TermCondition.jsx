@@ -2,8 +2,12 @@ import React from "react";
 
 const TermCondition = () => {
   return (
-    <div className="container-fluid p-4">
-      <div className="card border-dark shadow p-3 rounded">
+    <div className="container-fluid p-4"
+    style={{ backgroundColor: "rgb(252, 233, 241)"}}
+    >
+      <div className="card border-dark shadow p-3 rounded"
+      style={{ backgroundColor: "rgb(252, 233, 241)"}}
+      >
         <div className="card-body">
             <div className="row p-4">
                 <div className="col">
@@ -16,7 +20,7 @@ const TermCondition = () => {
             </div>
             <div className="row">
                 <div className="col p-4">
-                    <p className="card-text text-dark">
+                    <p className="card-text" style={{color: "rgb(8, 2, 2)"}}>
                     These Terms and Conditions ("Terms") constitute a legally binding agreement between you ("User" or "you") and our company governing your use of the Contacts App ("App"). By accessing or using the App, you agree to be bound by these Terms. If you do not agree to these Terms, please refrain from using the App.
                     </p>
                     <div className="row">

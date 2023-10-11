@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 import styled from "styled-components";
-import { InnerContainer } from "../Components/Elements";
+import { InnerContainer } from "../../Components/Elements";
 import SignupForm from "./SignupForm";
-import { AccountContext } from "../Assets/Contexts/AccountContext";
+import { AccountContext } from "../../Assets/Contexts/AccountContext";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,11 +12,11 @@ import {
   login,
   setActive,
   signup,
-} from "../Assets/Slices/UserSlice";
+} from "../../Assets/Slices/UserSlice";
 import "react-toastify/dist/ReactToastify.css";
-import { EntryService } from "../Services/EntryService";
+import { EntryService } from "../../Services/EntryService";
 import { ToastContainer, toast } from "react-toastify";
-import { UserService } from "../Services/UserService";
+import { UserService } from "../../Services/UserService";
 
 const RegisterContainer = styled.div`
   width: 100%;
@@ -36,7 +36,7 @@ const BoxContainer = styled.div`
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   position: relative;
   overflow: hidden;
-  background-color: #eef;
+  background-color: rgb(241, 212, 229);
 `;
 
 const TopContainer = styled.div`
@@ -81,11 +81,7 @@ const BackDrop = styled(motion.div)`
   top: -290px;
   left: -70px;
   transform: rotate(60deg);
-  background: linear-gradient(
-    58deg,
-    rgb(97, 103, 122) 20%,
-    rgb(216, 217, 218) 100%
-  );
+  background: linear-gradient(58deg, rgb(241, 212, 229) 20%, rgb(8, 2, 2) 100%);
 `;
 
 const backdropVariants = {
@@ -156,9 +152,10 @@ const Register = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     setClasses(validateForm(user));
 
+    console.log(user);
     switch (active) {
       case "signin":
         if (classes.email === "is-valid" && classes.password === "is-valid") {
@@ -170,7 +167,6 @@ const Register = (props) => {
               password: user.password,
             });
           } catch (err) {}
-          console.log(response);
           if (response.token !== null) {
             localStorage.setItem("Token", response.token);
             user_res = await UserService.getByEmail(user.email);
@@ -179,8 +175,13 @@ const Register = (props) => {
             localStorage.setItem("role", user_res.role);
             dispatch(login({ user: user_res }));
             toast.success("Login successful");
+            console.log(user_res.role);
             setTimeout(() => {
-              navigate("/home");
+              if (user_res.role === "ADMIN") {
+                navigate("/admin/home");
+              } else {
+                navigate("/user/home");
+              }
             }, 3000);
           } else {
             dispatch(setActive({ active: "signin" }));
@@ -206,11 +207,11 @@ const Register = (props) => {
             });
             dispatch(signup({ user: user }));
           } catch (err) {}
-          if (response.token !== undefined) {
+          if (response.Token !== undefined) {
             localStorage.setItem("username", user.name);
             localStorage.setItem("role", "USER");
             localStorage.setItem("Token", response.token);
-            navigate("/home");
+            navigate("/user/home");
           } else {
             dispatch(setActive({ active: "signup" }));
             toast.error("User already exists");
@@ -261,7 +262,10 @@ const Register = (props) => {
   return (
     <>
       <AccountContext.Provider value={contextValue}>
-        <div className="register-container bg-dark bg-gradient h-100">
+        <div
+          className="register-container h-100"
+          style={{ backgroundColor: "rgb(252, 233, 241)" }}
+        >
           <RegisterContainer>
             <BoxContainer>
               <TopContainer>

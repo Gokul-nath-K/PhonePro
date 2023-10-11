@@ -12,7 +12,7 @@ const NavBar = () => {
         <nav
           id="navbar-id"
           className="navbar navbar-expand-lg"
-          style={{ height: "9%", zIndex: "999", backgroundColor: "#272829" }}
+          style={{ height: "9%", zIndex: "999", backgroundColor: "rgb(8, 2, 2)" }}
         >
           <div className="container-fluid">
             <Link style={{ color: "white" }} className="navbar-brand px-3" to="/">

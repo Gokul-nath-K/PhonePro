@@ -4,12 +4,12 @@ const FAQ = () => {
   return (
     <>
       <div
-        className="container-fluid bg-body-secondary"
-        style={{ height: "100%" }}
+        className="container-fluid"
+        style={{ height: "100%", backgroundColor: "rgb(252, 233, 241)" }}
       >
         <div
-          className="bg-body-secondary"
-          style={{ paddingTop: "7%", paddingBottom: "6%" }}
+          className=""
+          style={{ paddingTop: "7%", paddingBottom: "6%", backgroundColor: "rgb(252, 233, 241)" }}
         >
           <div className="row p-3">
             <div className="col"></div>
@@ -121,7 +121,7 @@ const FAQ = () => {
                       Is my contact data secure?
                     </button>
                   </h2>
-                  <div
+                  <div  
                     id="collapseThree"
                     className="accordion-collapse collapse"
                     aria-labelledby="headingThree"

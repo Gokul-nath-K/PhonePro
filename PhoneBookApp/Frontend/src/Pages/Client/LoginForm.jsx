@@ -7,11 +7,12 @@ import {
   LineText,
   MutedLine,
   SubmitButton,
-} from "../Components/Elements";
-import { AccountContext } from "../Assets/Contexts/AccountContext";
+} from "../../Components/Elements";
+import { AccountContext } from "../../Assets/Contexts/AccountContext";
 
 const LoginForm = (props) => {
-  const { switchToSignup, handleChange, handleSubmit, classes } = useContext(AccountContext);
+  const { switchToSignup, handleChange, handleSubmit, classes } =
+    useContext(AccountContext);
 
   return (
     <>
@@ -22,20 +23,26 @@ const LoginForm = (props) => {
             type="email"
             onChange={handleChange}
             placeholder="Email"
-            className= { "form-control " + classes.email}
-            />
+            className={"form-control " + classes.email}
+          />
           <Input
             name="password"
             type="password"
             onChange={handleChange}
             placeholder="Password"
-            className= { "form-control " + classes.password}
+            className={"form-control " + classes.password}
           />
-          <div style={{ display: "flex", justifyContent: "center", width: "100%", flexDirection: "column", alignItems: "center"}}>  
-          <MutedLine>Forget password</MutedLine>
-          <SubmitButton type="submit">
-            Signin
-          </SubmitButton>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <MutedLine>Forget password</MutedLine>
+            <SubmitButton type="submit">Signin</SubmitButton>
           </div>
         </FormContainer>
         <LineText>

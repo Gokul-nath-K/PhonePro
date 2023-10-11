@@ -60,7 +60,7 @@ const ContactList = () => {
         style={{ paddingRight: "5%" }}
       >
         <div className="row ">
-          <h3 className="py-3 px-4 text-light">All contacts</h3>
+          <h3 className="py-3 px-4" style={{color: "rgb(8, 2, 2, 0.8)"}}>All contacts</h3>
         </div>
         <div className="row" style={{ height: "100vh" }}>
           <div className="col overflow-y-auto mx-3" style={{ height: "100%" }}>
@@ -70,11 +70,12 @@ const ContactList = () => {
                 return (
                   <div key={num}>
                     <div
-                      className="row bg-transparent border-bottom py-1 mt-3 mb-3"
+                      className="row bg-transparent py-1 mt-3 mb-3"
+                      style={{borderColor: "rgb(8, 2, 2)", borderBottom: "solid 1px rgb(8, 2, 2)"}}
                       id={firstletter}
                     >
                       <div className="col">
-                        <p className="pt-2 text-light fw-bold fs-3">
+                        <p className="pt-2 fw-bold fs-3" style={{color: "rgb(8, 2, 2, 0.8)"}}>
                           {firstletter.toUpperCase()}
                         </p>
                       </div>
@@ -99,24 +100,27 @@ const ContactList = () => {
                                 <div className="col-1 pt-1">
                                   <button
                                     type="button"
-                                    className="btn btn-secondary rounded fs-5"
+                                    className="btn fs-5"
                                     disabled
+                                    style={{ backgroundColor: "rgb(241, 212, 229)", maxHeight: "50px", minWidth: "40px"}}
                                   >
+                                    <p style={{color: "rgb(8, 2, 2)"}} >
                                     {contact.name.slice(0, 1)}
+                                    </p>
                                   </button>
                                 </div>
                                 <div className="col pt-1">
-                                  <p className="pt-2 text-light">
+                                  <p className="pt-2" style={{color: "rgb(8, 2, 2)"}}>
                                     {contact.name}
                                   </p>
                                 </div>
                                 <div className="col-1 pt-1">
                                   <button
                                     type="button"
-                                    className="btn btn-secondary rounded fs-5"
+                                    className="btn rounded fs-5"
                                     style={
                                       isHovering === contact.id
-                                        ? { display: "block" }
+                                        ? { display: "block", color:"rgb(8, 2, 2)", backgroundColor: "rgb(241, 212, 229)" }
                                         : style
                                     }
                                     onClick={() => handleEdit(contact)}
@@ -127,10 +131,10 @@ const ContactList = () => {
                                 <div className="col-1 pt-1">
                                   <button
                                     type="button"
-                                    className="btn btn-secondary rounded fs-5"
+                                    className="btn rounded fs-5"
                                     style={
                                       isHovering === contact.id
-                                        ? { display: "block" }
+                                        ? { display: "block", color:"rgb(8, 2, 2)", backgroundColor: "rgb(241, 212, 229)" }
                                         : style
                                     }
                                     onClick={() => handleDelete(contact.id)}
