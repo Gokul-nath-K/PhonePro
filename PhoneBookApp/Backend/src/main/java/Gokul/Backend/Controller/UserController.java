@@ -37,6 +37,12 @@ public class UserController {
 		return uService.getByEmail(email);
 	}
 
+	@GetMapping("/getByRole/{role}")
+	public List<UserDTO> getByRole(@PathVariable("role") String role) {
+
+		return uService.getByRole(role);
+	}
+
 	@GetMapping("/getById/{id}")
 	public UserDTO getById(@PathVariable("id") Long id) {
 

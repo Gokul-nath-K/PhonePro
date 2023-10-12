@@ -17,6 +17,7 @@ import UserAuth from './Pages/Client/Auth/UserAuth';
 import Feedbacks from './Pages/Admin/Feedbacks';
 import Unauthorized from './Pages/Others/Unauthorized';
 import ContactForm from './Pages/Others/ContactForm'
+import UserList from './Components/UserList';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
 
         <Route path='/admin'element={<AdminAuth />}>
           <Route path='home' element={<Dashboard />} >
+            <Route index element={<UserList />} />
             <Route path='feedback' element={<Feedbacks/>} />
           </Route>
         </Route>

@@ -56,11 +56,11 @@ const ContactList = () => {
   return (
     <>
       <div
-        className=" contact-list container-fluid"
-        style={{ paddingRight: "5%" }}
+        className="contact-list"
+        style={{ paddingRight: "4%", position: "relative", height: "80vh", overflow: "hidden" }}
       >
         <div className="row ">
-          <h3 className="py-3 px-4" style={{color: "rgb(8, 2, 2, 0.8)"}}>All contacts</h3>
+          <h3 className="py-2 px-4" style={{color: "rgb(8, 2, 2, 0.8)"}}>All contacts</h3>
         </div>
         <div className="row" style={{ height: "100vh" }}>
           <div className="col overflow-y-auto mx-3" style={{ height: "100%" }}>

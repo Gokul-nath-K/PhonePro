@@ -23,12 +23,12 @@ function SearchPage() {
     <>
       <div
         className="container-fluid pt-5"
-        style={{ maxWidth: "80%", paddingRight: "5%" }}
+        style={{ maxWidth: "80%", paddingRight: "5%", overflow: "auto", maxHeight: "80%" }}
       >
-        <div className="row">
+        <div className="row ">
           <SearchBar handleChange={handleChange} />
         </div>
-        <div className="row pt-4 h-100">
+        <div className="row pt-4 h-75 ">
           {filteredData &&
             filteredData.map((contact) => {
               return (

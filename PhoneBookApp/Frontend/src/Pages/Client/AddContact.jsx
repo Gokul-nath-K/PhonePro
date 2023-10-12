@@ -27,7 +27,7 @@ function AddContact() {
       console.log(`Error : ${err.message}`);
     }
 
-    navigate(-1);
+    navigate("/user/home");
   };
   return (
     <>
