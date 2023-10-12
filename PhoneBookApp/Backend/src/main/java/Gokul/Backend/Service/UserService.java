@@ -3,6 +3,7 @@ package Gokul.Backend.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import Gokul.Backend.Entity.Enumerate.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +71,26 @@ public class UserService {
 				.phoneno(user.getPhoneno())
 				.role(user.getRole().toString())
 				.build();
+	}
+
+	public List<UserDTO> getByRole(String role) {
+
+		List<User> user = uRepo.findByRole(Role.valueOf(role.toUpperCase()));
+		List<UserDTO> userDTO = new ArrayList<>();
+
+		for(User u : user) {
+
+			userDTO.add( UserDTO
+					.builder()
+					.id(u.getId())
+					.name(u.getName())
+					.email(u.getEmail())
+					.dob(u.getDob())
+					.phoneno(u.getPhoneno())
+					.role(u.getRole().toString())
+					.build());
+		}
+
+		return userDTO;
 	}
 }

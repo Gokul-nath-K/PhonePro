@@ -2,6 +2,7 @@ import React from "react";
 import { AdminSidebar } from "./AdminSidebar";
 import Feedbacks from "./Feedbacks";
 import { Outlet } from "react-router-dom";
+import LogoutModal from "../../Components/LogoutModal";
 
 const Dashboard = () => {
   return (
@@ -20,11 +21,12 @@ const Dashboard = () => {
         >
           <div className="card-body">
             <div className="container-fluid my-5 mx-5">
-            <Outlet />
+              <Outlet />
             </div>
           </div>
         </div>
       </div>
+      <LogoutModal />
     </>
   );
 };

@@ -29,7 +29,7 @@ function SideBar() {
           id="menu"
         >
           <li className="nav-item mb-3">
-            <Link to="/home" className="nav-link align-middle px-0">
+            <Link to="/user/home" className="nav-link align-middle px-0">
               <HouseFill color="azure" size={20} />{" "}
               <span
                 className="ms-1 d-none d-sm-inline "
@@ -107,7 +107,7 @@ function SideBar() {
             <BoxArrowLeft color="azure" size={20} />{" "}
             <span
               className="ms-1 d-none d-sm-inline"
-              style={{ color: "rgb(241, 212, 229)" }}
+              style={{ color: " rgb(241, 212, 229)" }}
             >
               Logout
             </span>
