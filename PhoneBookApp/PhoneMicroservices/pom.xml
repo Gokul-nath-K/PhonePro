@@ -16,6 +16,7 @@
         <module>Feedback-service</module>
         <module>ServiceRegistry</module>
         <module>Gateway</module>
+        <module>Security-service</module>
     </modules>
 
     <properties>
