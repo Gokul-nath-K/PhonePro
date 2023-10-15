@@ -13,6 +13,7 @@
         <module name="Feedback-service" />
         <module name="Contacts-service" />
         <module name="ServiceRegistry" />
+        <module name="Gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
