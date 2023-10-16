@@ -158,17 +158,17 @@ const Register = (props) => {
     console.log(user);
     switch (active) {
       case "signin":
-        if (classes.email === "is-valid" && classes.password === "is-valid") {
+        if (classes.name === "is-valid" && classes.password === "is-valid") {
           let user_res;
           let response;
           try {
             response = await EntryService.validateUser({
-              email: user.email,
+              username: user.name,
               password: user.password,
             });
           } catch (err) {}
-          if (response.token !== null) {
-            localStorage.setItem("Token", response.token);
+          if (response !== "") {
+            localStorage.setItem("Token", response);
             user_res = await UserService.getByEmail(user.email);
             localStorage.setItem("name", user_res.name);
             localStorage.setItem("id", user_res.id);
@@ -207,10 +207,10 @@ const Register = (props) => {
             });
             dispatch(signup({ user: user }));
           } catch (err) {}
-          if (response.Token !== undefined) {
+          if (response !== "") {
             localStorage.setItem("username", user.name);
             localStorage.setItem("role", "USER");
-            localStorage.setItem("Token", response.token);
+            localStorage.setItem("Token", response);
             navigate("/user/home");
           } else {
             dispatch(setActive({ active: "signup" }));

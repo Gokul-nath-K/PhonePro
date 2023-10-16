@@ -13,10 +13,9 @@
     <modules>
         <module>Contacts-service</module>
         <module>Feedback-service</module>
-        <module>Feedback-service</module>
         <module>ServiceRegistry</module>
         <module>Gateway</module>
-        <module>Security-service</module>
+        <module>Identity-service</module>
     </modules>
 
     <properties>
