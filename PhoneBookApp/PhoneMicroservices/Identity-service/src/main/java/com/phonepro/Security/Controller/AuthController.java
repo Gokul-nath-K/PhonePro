@@ -9,10 +9,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
-@RestController
+    @RestController
 @RequestMapping("/auth")
 public class AuthController {
+
+
     @Autowired
     private AuthService service;
 
@@ -30,6 +31,8 @@ public class AuthController {
         try {
 
             Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+
+            System.out.println(authenticate.isAuthenticated());
 
             if (authenticate.isAuthenticated()) {
                 return service.generateToken(authRequest.getUsername());

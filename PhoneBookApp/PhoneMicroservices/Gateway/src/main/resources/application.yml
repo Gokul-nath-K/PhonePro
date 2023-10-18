@@ -3,6 +3,23 @@ spring:
     name: GATEWAY-SERVICE
   cloud:
     gateway:
+      default-filters:
+        - AuthenticationFilter=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "*"
+            allowed-methods:
+              - POST
+              - GET
+              - PUT
+              - DELETE
+            allowed-headers:
+              - Authorization
+              - Content-Type
+              - Access-Control-Allow-Origin
+              - Access-Control-Allow-Credentials
+
       routes:
         - id: contact-service
           uri: lb://CONTACT-SERVICE
@@ -22,6 +39,9 @@ spring:
           uri: lb://IDENTITY-SERVICE
           predicates:
             - Path=/auth/**
+          filters:
+            - AuthenticationFilter
+
 
 eureka:
   client:

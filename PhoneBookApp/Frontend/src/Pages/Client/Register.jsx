@@ -139,12 +139,13 @@ const Register = (props) => {
       classname.password = "is-valid";
     }
 
-    if (!value.name) {
-      classname.name = "is-invalid";
+    if (!value.username) {
+      classname.username = "is-invalid";
     } else {
-      classname.name = "is-valid";
+      classname.username = "is-valid";
     }
 
+    console.log(classname);
     return classname;
   };
 
@@ -154,30 +155,29 @@ const Register = (props) => {
     e.preventDefault();
 
     setClasses(validateForm(user));
-
     console.log(user);
     switch (active) {
       case "signin":
-        if (classes.name === "is-valid" && classes.password === "is-valid") {
+        if (classes.username === "is-valid" && classes.password === "is-valid") {
           let user_res;
           let response;
           try {
             response = await EntryService.validateUser({
-              username: user.name,
+              username: user.username,
               password: user.password,
             });
           } catch (err) {}
-          if (response !== "") {
+          if (response) {
             localStorage.setItem("Token", response);
-            user_res = await UserService.getByEmail(user.email);
-            localStorage.setItem("name", user_res.name);
-            localStorage.setItem("id", user_res.id);
-            localStorage.setItem("role", user_res.role);
-            dispatch(login({ user: user_res }));
+            // user_res = await UserService.getByEmail(user.email);
+            // localStorage.setItem("name", user_res.name);
+            // localStorage.setItem("id", user_res.id);
+            // localStorage.setItem("role", user_res.role);
+            // dispatch(login({ user: user_res }));
             toast.success("Login successful");
-            console.log(user_res.role);
+            // console.log(user_res.role);
             setTimeout(() => {
-              if (user_res.role === "ADMIN") {
+              if (response) {
                 navigate("/admin/home");
               } else {
                 navigate("/user/home");

@@ -30,10 +30,6 @@ public class AuthConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .cors(corsConfirguarationSource -> {
-                    corsConfirguarationSource.configurationSource(
-                            corsConfigurationSource());
-                })
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/register", "/auth/token", "/auth/validate").permitAll()
@@ -57,19 +53,5 @@ public class AuthConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
-    }
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedHeaders(Api.HEADERS);
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedMethods(Api.METHODS);
-        configuration.setAllowedOrigins(Api.ORIGINS);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-
-        return source;
     }
 }

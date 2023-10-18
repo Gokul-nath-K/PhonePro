@@ -19,11 +19,11 @@ const LoginForm = (props) => {
       <BoxContainer>
         <FormContainer onSubmit={handleSubmit} className="needs-validation">
           <Input
-            name="name"
+            name="username"
             type="text"
             onChange={handleChange}
             placeholder="name"
-            className={"form-control " + classes.name}
+            className={"form-control " + classes.username}
           />
           <Input
             name="password"

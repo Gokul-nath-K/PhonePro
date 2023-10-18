@@ -19,7 +19,7 @@ const SignupForm = (props) => {
         <FormContainer>
           <Input
             onChange={handleChange}
-            name="name"
+            name="username"
             type="text"
             placeholder="Full name"
             className={"form-control " + classes.name}
