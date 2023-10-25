@@ -2,28 +2,28 @@ import axios from 'axios';
 import { BASE_URL, HEADERS } from "../Constants/ApiConstant";
 
 const getAll = async () => {
-  const response = await axios.get(`${BASE_URL}/api/user/getAll`, {
+  const response = await axios.get(`${BASE_URL}/identity/user/getAll`, {
     headers: HEADERS
   });
   return response.data;
 };
 
 const getAllUser = async () => {
-  const response = await axios.get(`${BASE_URL}/user/getAllUser`, {
+  const response = await axios.get(`${BASE_URL}/identity/user/getAllUser`, {
     headers: HEADERS,
   });
   return response.data;
 };
 
 const getByEmail = async (email) => {
-  const response = await axios.get(`${BASE_URL}/user/getByEmail/` + email, {
+  const response = await axios.get(`${BASE_URL}/identity/user/getByEmail/` + email, {
     headers: HEADERS,
   });
   return response.data;
 };
 
 const getByRole = async (role) => {
-  const response = await axios.get(`${BASE_URL}/user/getByRole/` + role, {
+  const response = await axios.get(`${BASE_URL}/identity/user/getByRole/` + role, {
     headers: HEADERS,
   });
   return response.data;

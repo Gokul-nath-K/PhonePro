@@ -1,4 +1,4 @@
-import { PencilSquare, Trash3Fill } from "react-bootstrap-icons";
+import { InfoCircleFill, PencilSquare, Trash3Fill } from "react-bootstrap-icons";
 // import { contacts } from "../Assets/Contexts/Contacts";
 import { useCallback, useEffect, useState } from "react";
 
@@ -113,6 +113,20 @@ const ContactList = () => {
                                   <p className="pt-2" style={{color: "rgb(8, 2, 2)"}}>
                                     {contact.name}
                                   </p>
+                                </div>
+                                <div className="col-1 pt-1">
+                                  <button
+                                    type="button"
+                                    className="btn rounded fs-5"
+                                    style={
+                                      isHovering === contact.id
+                                        ? { display: "block", color:"rgb(8, 2, 2)", backgroundColor: "rgb(241, 212, 229)" }
+                                        : style
+                                    }
+                                    onClick={() => handleEdit(contact)}
+                                  >
+                                    <InfoCircleFill />
+                                  </button>
                                 </div>
                                 <div className="col-1 pt-1">
                                   <button

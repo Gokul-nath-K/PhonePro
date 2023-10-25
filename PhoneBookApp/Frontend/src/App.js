@@ -18,6 +18,7 @@ import Feedbacks from './Pages/Admin/Feedbacks';
 import Unauthorized from './Pages/Others/Unauthorized';
 import ContactForm from './Pages/Others/ContactForm'
 import UserList from './Components/UserList';
+import Info from './Pages/Client/Info';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
             <Route path='editcontact' element={<EditContact/>} />
             <Route path='groupcontact' element={<GroupContact/>} />
             <Route path='import-contacts' element={<ImportContacts/>} />
+            <Route path='info' element={<Info   />} />
           </Route>
         </Route>
 

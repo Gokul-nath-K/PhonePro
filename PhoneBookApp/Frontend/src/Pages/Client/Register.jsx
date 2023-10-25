@@ -145,7 +145,6 @@ const Register = (props) => {
       classname.username = "is-valid";
     }
 
-    console.log(classname);
     return classname;
   };
 
@@ -158,26 +157,26 @@ const Register = (props) => {
     console.log(user);
     switch (active) {
       case "signin":
-        if (classes.username === "is-valid" && classes.password === "is-valid") {
+        if (classes.email === "is-valid" && classes.password === "is-valid") {
           let user_res;
           let response;
           try {
             response = await EntryService.validateUser({
-              username: user.username,
+              email: user.email,
               password: user.password,
             });
           } catch (err) {}
           if (response) {
             localStorage.setItem("Token", response);
-            // user_res = await UserService.getByEmail(user.email);
-            // localStorage.setItem("name", user_res.name);
-            // localStorage.setItem("id", user_res.id);
-            // localStorage.setItem("role", user_res.role);
-            // dispatch(login({ user: user_res }));
+            user_res = await UserService.getByEmail(user.email);
+            localStorage.setItem("name", user_res.name);
+            localStorage.setItem("id", user_res.id);
+            localStorage.setItem("role", user_res.role);
+            dispatch(login({ user: user_res }));
             toast.success("Login successful");
-            // console.log(user_res.role);
+            console.log(user_res.role);
             setTimeout(() => {
-              if (response) {
+              if (user_res.role === "ADMIN") {
                 navigate("/admin/home");
               } else {
                 navigate("/user/home");

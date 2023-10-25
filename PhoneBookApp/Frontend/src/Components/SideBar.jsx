@@ -80,6 +80,17 @@ function SideBar() {
               </span>
             </Link>
           </li>
+          <li className="nav-item mb-3">
+            <Link to="info" className="nav-link px-0 align-middle">
+              <PersonFillAdd color="azure" size={20} />{" "}
+              <span
+                className="ms-1 d-none d-sm-inline"
+                style={{ color: "rgb(241, 212, 229)" }}
+              >
+                Info
+              </span>
+            </Link>
+          </li>
         </ul>
         <hr />
         <div className="pb-4">

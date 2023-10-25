@@ -9,16 +9,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-    @RestController
-@RequestMapping("/auth")
+@RestController
+@RequestMapping("/identity/auth")
 public class AuthController {
 
 
     @Autowired
     private AuthService service;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
     public String addNewUser(@RequestBody UserCredential user) {
@@ -28,22 +25,7 @@ public class AuthController {
     @PostMapping("/token")
     public String getToken(@RequestBody AuthRequest authRequest) {
 
-        try {
-
-            Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-
-            System.out.println(authenticate.isAuthenticated());
-
-            if (authenticate.isAuthenticated()) {
-                return service.generateToken(authRequest.getUsername());
-            } else {
-                throw new RuntimeException("");
-            }
-        }
-        catch(Exception e) {
-
-            return "";
-        }
+        return service.generateToken(authRequest);
     }
 
     @GetMapping("/validate")
