@@ -2,18 +2,22 @@ package com.phonepro.Contacts.Services;
 
 import java.util.List;
 
+import com.phonepro.Contacts.DTO.UserResponse;
 import com.phonepro.Contacts.Model.Contacts;
 import com.phonepro.Contacts.Respository.ContactsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ContactsService {
 
     @Autowired
     private ContactsRepository cRepo;
+
+    @Autowired
+    private RestTemplate template;
 
     public List<Contacts> getAll() {
 
@@ -48,7 +52,17 @@ public class ContactsService {
 
     public Contacts postContact(Contacts contact) {
 
-        return cRepo.save(contact);
+
+        UserResponse userResponse = template.getForObject("http://localhost:8083/identity/user/getById/" + contact.getUser_id(), UserResponse.class);
+
+        if(userResponse != null) {
+
+            return cRepo.save(contact);
+        }
+        else {
+
+            return null;
+        }
     }
 
     public Contacts updateContact(Contacts newContact, Long id) {

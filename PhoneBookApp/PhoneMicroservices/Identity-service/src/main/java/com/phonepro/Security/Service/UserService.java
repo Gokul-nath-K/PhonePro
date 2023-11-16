@@ -58,17 +58,25 @@ public class UserService {
 
     public UserDTO getById(Long id) {
 
-        UserCredential user =  uRepo.findById(id).get();
+        try {
 
-        return UserDTO
-                .builder()
-                .id(user.getId())
-                .name(user.getName())
-                .email(user.getEmail())
-                .dob(user.getDob())
-                .phoneno(user.getPhoneno())
-                .role(user.getRole())
-                .build();
+            UserCredential user =  uRepo.findById(id).get();
+
+            return UserDTO
+                    .builder()
+                    .id(user.getId())
+                    .name(user.getName())
+                    .email(user.getEmail())
+                    .dob(user.getDob())
+                    .phoneno(user.getPhoneno())
+                    .role(user.getRole())
+                    .build();
+        }
+        catch(Exception e) {
+
+            return null;
+        }
+
     }
 
     public List<UserDTO> getByRole(String role) {
