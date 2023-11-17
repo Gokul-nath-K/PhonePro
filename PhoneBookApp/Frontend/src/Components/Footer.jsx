@@ -7,7 +7,7 @@ const Footer = () => {
     <>
       <footer
         className="text-center text-white position-absolute w-100"
-        style={{ backgroundColor: "rgb(8, 2, 2)" }}
+        style={{ backgroundColor: "rgb(27, 39, 58)" }}
       >
         <div className="container">
           <section className="mt-4">
