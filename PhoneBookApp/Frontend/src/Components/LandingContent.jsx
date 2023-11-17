@@ -6,11 +6,11 @@ const LandingContent = () => {
       <div className="img-container">
           <div className="bg-image"></div>
           <div className="inner-content text-center text-light">
-            <h2 className="py-4" style={{color:"#080202"}}>Your Contacts, Your Way</h2>
-            <h4 style={{color:"#080202"}}>Customize and organize your contacts like never before.</h4>
+            <h2 className="py-4" style={{color:"	#FFFFFF"}}>Your Contacts, Your Way</h2>
+            <h4 style={{color:"	#FFFFFF"}}>Customize and organize your contacts like never before.</h4>
           </div>
       </div>
-    </>
+    </> 
   );
 };
 
