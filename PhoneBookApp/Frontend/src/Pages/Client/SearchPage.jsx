@@ -1,10 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "../../Components/SearchBar";
-import { contacts } from "../../Assets/Contexts/Contacts";
+// import { contacts } from "../../Assets/Contexts/Contacts";
+import { ContactService } from "../../Services/ContactService";
 
 function SearchPage() {
   const [searchInput, setSearchInput] = useState("");
+  const [contacts, setContacts] = useState([]);
 
+  const fetchData = (async () => {
+    try {
+      const response = await ContactService.getAllContacts();
+      setContacts(response);
+
+      console.log(response);
+    } catch (err) {
+    }
+  });
+  useEffect(() => {
+    fetchData();
+  }, [])
   let handleChange = (e) => {
     e.preventDefault();
     let lowerCase = e.target.value.toLowerCase();
