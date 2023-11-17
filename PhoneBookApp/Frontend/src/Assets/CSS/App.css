@@ -63,8 +63,7 @@ body::-webkit-scrollbar {
     height: 91vh;
     width: 100%;
     top: 0;
-    /* background-image: url('../Images/LangingPage_background.jpg'); */
-    background-color: rgb(252, 233, 241);
+     background-image: url('https://img.freepik.com/free-vector/dl-dark-wavy-background_23-2148388254.jpg'); 
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
