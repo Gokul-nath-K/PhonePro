@@ -82,7 +82,7 @@ const Footer = () => {
 
         <div
           className="text-center p-3"
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          style={{ backgroundColor: "rgb(27, 39, 58)" }}
         >
           © 2023 Copyright:{" "}
           <a className="text-white" href="http://localhost:3000/">
