@@ -48,6 +48,16 @@ const ContactList = () => {
     navigate("editcontact");
   };
 
+  const showContactInfo = (contact) => {
+    let editedContact = contacts[contacts.indexOf(contact)];
+
+    dispatch(
+      editContact({
+        editedContact: editedContact,
+      })
+    );
+    navigate("info");
+  };
   const handleDelete = async (id) => {
     try {
       await ContactService.deleteContact(id).then(() => fetchContacts());
@@ -123,7 +133,7 @@ const ContactList = () => {
                                         ? { display: "block", color:"rgb(8, 2, 2)", backgroundColor: "rgb(241, 212, 229)" }
                                         : style
                                     }
-                                    onClick={() => handleEdit(contact)}
+                                    onClick={() => showContactInfo(contact)}
                                   >
                                     <InfoCircleFill />
                                   </button>

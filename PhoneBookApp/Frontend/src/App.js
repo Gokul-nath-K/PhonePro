@@ -40,7 +40,7 @@ function App() {
             <Route path='editcontact' element={<EditContact/>} />
             <Route path='groupcontact' element={<GroupContact/>} />
             <Route path='import-contacts' element={<ImportContacts/>} />
-            <Route path='info' element={<Info   />} />
+            <Route path='info' element={<Info />} />
           </Route>
         </Route>
 

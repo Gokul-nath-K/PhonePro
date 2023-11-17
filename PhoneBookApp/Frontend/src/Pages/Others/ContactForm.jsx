@@ -1,18 +1,23 @@
 import React, { useState } from "react";
+import { UserService } from "../../Services/UserService";
+import { useNavigate } from "react-router-dom";
 
 const ContactForm = () => {
   const [formStatus, setFormStatus] = useState("Send");
+  const [feedback, setFeedback] = useState({});
+  const navigate = useNavigate();
 
+  const handleChange = (e) => {
+    setFeedback({ ...feedback, [e.target.id]: e.target.value });
+  };
   const onSubmit = (e) => {
     e.preventDefault();
     setFormStatus("Submitting...");
-    const { name, email, message } = e.target.elements;
-    let conFom = {
-      name: name.value,
-      email: email.value,
-      message: message.value,
-    };
-    console.log(conFom);
+    
+    setFeedback({ ...feedback, date : new Date().toJSON()});
+
+    const response = UserService.postFeedback(feedback).then(() => navigate(-1));
+
   };
   return (
     <>
@@ -57,6 +62,7 @@ const ContactForm = () => {
                           Name
                         </label>
                         <input
+                        onChange={handleChange}
                           className="form-control"
                           type="text"
                           id="name"
@@ -68,6 +74,7 @@ const ContactForm = () => {
                           Email
                         </label>
                         <input
+                        onChange={handleChange}
                           className="form-control"
                           type="email"
                           id="email"
@@ -79,9 +86,10 @@ const ContactForm = () => {
                           Phone number
                         </label>
                         <input
+                        onChange={handleChange}
                           className="form-control"
                           type="number"
-                          id="phno"
+                          id="phoneno"
                           required
                         />
                       </div>
@@ -90,6 +98,7 @@ const ContactForm = () => {
                           Message
                         </label>
                         <textarea
+                          onChange={handleChange}
                           className="form-control"
                           id="message"
                           required

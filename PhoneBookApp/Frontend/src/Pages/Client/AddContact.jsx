@@ -14,13 +14,14 @@ function AddContact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let id = localStorage.getItem("id");
-
+    
     let userById = await UserService.getById(id);
     const userContact = {
       ...contact,
-      user: userById,
+      user_id: userById.id,
     };
 
+    console.log(userContact);
     try {
       await ContactService.postContact(userContact);
     } catch (err) {

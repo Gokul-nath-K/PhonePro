@@ -28,7 +28,7 @@ const UserList = () => {
                 <th> Email</th>
                 <th> Phone number</th>
                 <th> Date of birth</th>
-                <th className="d-flex justify-content-center"> Actions</th>
+                {/* <th className="d-flex justify-content-center"> Actions</th> */}
               </tr>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@ const UserList = () => {
                       <td> {user.email}</td>
                       <td> {user.phoneno}</td>
                       <td> {user.dob}</td>
-                      <td className="d-flex justify-content-center">
+                      {/* <td className="d-flex justify-content-center">
                         <button
                           style={{
                             marginLeft: "10px",
@@ -51,7 +51,7 @@ const UserList = () => {
                           className="btn"
                         >
                           View{" "}
-                        </button>
+                        </button> */}
                         {/* <button
                                   style={{ marginLeft: "10px" }}
                                   onClick={() => {}}
@@ -59,7 +59,7 @@ const UserList = () => {
                                 >
                                   Delete{" "}
                                 </button> */}
-                      </td>
+                      {/* </td> */}
                     </tr>
                   );
                 })}
