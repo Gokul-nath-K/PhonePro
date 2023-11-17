@@ -19,12 +19,15 @@ import { ToastContainer, toast } from "react-toastify";
 import { UserService } from "../../Services/UserService";
 
 const RegisterContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe0Vi5K3r-l01PZ3wlx2usSabWew7VVxf0Ng&usqp=CAU);
+background-repeat : no-repeat;
+background-size: cover;
 `;
 
 const BoxContainer = styled.div`
@@ -36,7 +39,7 @@ const BoxContainer = styled.div`
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   position: relative;
   overflow: hidden;
-  background-color: rgb(241, 212, 229);
+  background-color: #eef;
 `;
 
 const TopContainer = styled.div`
@@ -81,7 +84,10 @@ const BackDrop = styled(motion.div)`
   top: -290px;
   left: -70px;
   transform: rotate(60deg);
-  background: linear-gradient(58deg, rgb(241, 212, 229) 20%, rgb(8, 2, 2) 100%);
+  background: linear-gradient(58deg, rgb(0 0 0) 20%, rgb(110 122 135) 100% );
+}
+
+);
 `;
 
 const backdropVariants = {
