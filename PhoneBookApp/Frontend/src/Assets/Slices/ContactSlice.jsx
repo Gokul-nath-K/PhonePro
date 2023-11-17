@@ -15,6 +15,7 @@ const ContactSlice = createSlice({
 
 export const getAllContacts = (state) => state.contacts;
 export const getEditedContacts = (state) => state.contact.editedContact;
+export const getContactInfo = (state) => state.contact.editedContact;
 
 export const { editContact } = ContactSlice.actions;
 

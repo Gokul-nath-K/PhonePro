@@ -25,6 +25,6 @@ public class FeedbackController {
     @PostMapping("/post")
     public ResponseEntity<Feedbacks> postFeedbacks(@RequestBody Feedbacks feedback) {
 
-        return ResponseEntity.ok(   fService.postFeedBack(feedback));
+        return ResponseEntity.ok(fService.postFeedBack(feedback));
     }
 }

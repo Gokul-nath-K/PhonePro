@@ -30,16 +30,32 @@ const getByRole = async (role) => {
 };
 
 const getById = async (id) => {
-  const response = await axios.get(`${BASE_URL}/user/getById/` + id, {
+  const response = await axios.get(`${BASE_URL}/identity/user/getById/` + id, {
     headers: HEADERS,
   });
   return response.data;
 };
+
+const postFeedback = async (feedback) => {
+  
+  const response = await axios.post(`http://localhost:8082/feedback/post`, feedback)
+  return response.data;
+
+}
+
+const getFeedback = async () => {
+  
+  const response = await axios.get(`http://localhost:8082/feedback/get_all`)
+  return response.data;
+
+}
 
 export const UserService = {
   getAll,
   getAllUser,
   getByEmail,
   getById,
-  getByRole
+  getByRole,
+  postFeedback,
+  getFeedback
 };

@@ -18,16 +18,8 @@ function EditContact() {
         phoneno: editedContact.phoneno,
         email: editedContact.email,
         groupname: editedContact.groupname,
-        user: {
-          id: editedContact.user.id,
-          name: editedContact.user.username,
-          email: editedContact.user.email,
-          phoneno: editedContact.user.phoneno,
-          dob: editedContact.user.dob,
-          password: editedContact.user.password,
-          role: editedContact.user.role,
-        },
-      });
+        user_id: editedContact.user_id
+       });
     }
   }, [editedContact, navigate]);
 

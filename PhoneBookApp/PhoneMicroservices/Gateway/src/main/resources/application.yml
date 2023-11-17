@@ -46,8 +46,6 @@ spring:
           uri: lb://FEEDBACK-SERVICE
           predicates:
             - Path= /feedback/**
-          filters:
-            - AuthenticationFilter
 
         - id: identity-service
           uri: lb://IDENTITY-SERVICE

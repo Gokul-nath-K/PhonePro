@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Feedbacks {
+public class    Feedbacks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,7 @@ public class Feedbacks {
     private Long phoneno;
     private String name;
     private String email;
-    private String Date;
+    private String message;
+    private String date;
 
 }
